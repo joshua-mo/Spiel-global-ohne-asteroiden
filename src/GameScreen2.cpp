@@ -384,52 +384,52 @@ void Game::GameScreen2::Draw() {
 
 
     //Anzeigen
-    DrawText(" M - pause", 220, 20, 20, LIGHTGRAY);
-    DrawText(" TAB - Switch Cam", 220, 60, 20, LIGHTGRAY);
+    DrawText(" M - pause", 70, 20, 20, LIGHTGRAY);
+    DrawText(" TAB - Switch Cam", 70, 60, 20, LIGHTGRAY);
     // DrawText("Lives", 415, 180, 30, RED);
      //DrawText("Space", 415, 220, 30, DARKBLUE);
     // DrawText(TextFormat("Lives: %02i", player.lives), 425, 180, 30, RED);
     // DrawText(TextFormat("Space: %02i", planet.landed), 425, 220, 25, BLUE);
-    DrawText(TextFormat("Score: %02i", highscore), 225, 140, 35, LIGHTGRAY);
+    DrawText(TextFormat("Score: %02i", highscore), 820, 140, 35, LIGHTGRAY);
     //Live Anzeige
     if (player.lives == 3) {
-        DrawTexture(Lives, 500, 215, WHITE);
-        DrawTexture(Lives, 530, 215, WHITE);
-        DrawTexture(Lives, 560, 215, WHITE);
+        DrawTexture(Lives, 900, 215, WHITE);
+        DrawTexture(Lives, 930, 215, WHITE);
+        DrawTexture(Lives, 960, 215, WHITE);
     }
     if (player.lives == 2) {
-        DrawTexture(Lives, 530, 215, WHITE);
-        DrawTexture(Lives, 560, 215, WHITE);
+        DrawTexture(Lives, 930, 215, WHITE);
+        DrawTexture(Lives, 960, 215, WHITE);
     }
     if (player.lives == 1) {
-        DrawTexture(Lives, 560, 215, WHITE);
+        DrawTexture(Lives, 960, 215, WHITE);
     }
 
     //Space Anzeige 
     if (planet.landed == 5) {
-        DrawTexture(Spaces, 420, 180, WHITE);
-        DrawTexture(Spaces, 455, 180, WHITE);
-        DrawTexture(Spaces, 490, 180, WHITE);
-        DrawTexture(Spaces, 525, 180, WHITE);
-        DrawTexture(Spaces, 560, 180, WHITE);
+        DrawTexture(Spaces, 820, 180, WHITE);
+        DrawTexture(Spaces, 855, 180, WHITE);
+        DrawTexture(Spaces, 890, 180, WHITE);
+        DrawTexture(Spaces, 925, 180, WHITE);
+        DrawTexture(Spaces, 960, 180, WHITE);
     }
     if (planet.landed == 4) {
-        DrawTexture(Spaces, 455, 180, WHITE);
-        DrawTexture(Spaces, 490, 180, WHITE);
-        DrawTexture(Spaces, 525, 180, WHITE);
-        DrawTexture(Spaces, 560, 180, WHITE);
+        DrawTexture(Spaces, 855, 180, WHITE);
+        DrawTexture(Spaces, 890, 180, WHITE);
+        DrawTexture(Spaces, 925, 180, WHITE);
+        DrawTexture(Spaces, 960, 180, WHITE);
     }
     if (planet.landed == 3) {
-        DrawTexture(Spaces, 490, 180, WHITE);
-        DrawTexture(Spaces, 525, 180, WHITE);
-        DrawTexture(Spaces, 560, 180, WHITE);
+        DrawTexture(Spaces, 890, 180, WHITE);
+        DrawTexture(Spaces, 925, 180, WHITE);
+        DrawTexture(Spaces, 960, 180, WHITE);
     }
     if (planet.landed == 2) {
-        DrawTexture(Spaces, 525, 180, WHITE);
-        DrawTexture(Spaces, 560, 180, WHITE);
+        DrawTexture(Spaces, 925, 180, WHITE);
+        DrawTexture(Spaces, 960, 180, WHITE);
     }
     if (planet.landed == 1) {
-        DrawTexture(Spaces, 560, 180, WHITE);
+        DrawTexture(Spaces, 960, 180, WHITE);
     }
 
 
