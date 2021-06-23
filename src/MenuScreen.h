@@ -2,10 +2,17 @@
 
 #include "Screen.h"
 
+
 namespace Game {
     class MenuScreen : public Screen {
     private:
         MenuScreen();
+        Texture2D background;
+        Texture2D welt;
+        Texture2D start;
+        Texture2D startpink;
+        Texture2D quit;
+        Texture2D quitpink;
 
     public:
         static Screen * getInstance() {

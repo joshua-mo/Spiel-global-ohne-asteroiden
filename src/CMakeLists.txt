@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp config.h game.h helper.h Screen.h MenuScreen.cpp MenuScreen.h GameScreen.cpp GameScreen.h Sprite.h)
+add_executable(${PROJECT_NAME} main.cpp config.h game.h helper.h Screen.h MenuScreen.cpp MenuScreen.h GameScreen.cpp GameScreen.h Sprite.h   "Entity.h" "Game Over.h" "Game Over.cpp" "StopScreen.h" "StopScreen.cpp" "PreScreen.h" "PreScreen.cpp" "helpScreen.h" "helpScreen.cpp" "GameScreen2.cpp" "GameScreen2.h")
 
 # Add config.h.in file
 configure_file(config.h.in config.h)

@@ -20,9 +20,10 @@
 #define NUM_MAX_PLANETS 2
 
 
+
 namespace Game {
-    class GameScreen : public Screen {
-   
+    class GameScreen2 : public Screen {
+
     private:
         //Texturen        
         Texture2D background;
@@ -31,26 +32,26 @@ namespace Game {
         Texture2D alienTexture2;
         Texture2D Lives;
         Texture2D Spaces;
-       
 
-    
+
+
     private:
         std::vector<std::unique_ptr<Sprite>> sprites;
 
-        GameScreen();
+        GameScreen2();
 
 
     public:
-        static Screen *getInstance() {
-            static GameScreen instance;
+        static Screen* getInstance() {
+            static GameScreen2 instance;
             return &instance;
         }
 
-        GameScreen(GameScreen const &) = delete;
+        GameScreen2(GameScreen2 const&) = delete;
 
-        void operator=(GameScreen const &) = delete;
+        void operator=(GameScreen2 const&) = delete;
 
-        ~GameScreen();
+        ~GameScreen2();
 
         void ProcessInput() override;
 
@@ -62,19 +63,10 @@ namespace Game {
     };
 
 
-    static Player player;
-    static Planet planet;
-    static Bullet bullet[NUM_SHOOTS];
-    static Enemy enemy[NUM_MAX_ENEMIES];
-    static Enemy enemy2[NUM_MAX_ENEMIES];
 
-    static int activeEnemies;
-    static int activeEnemies2;
 
-   
 
-  
-   
+
 
 
 

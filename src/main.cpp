@@ -7,6 +7,8 @@
 #include "game.h"
 
 Game::Screen* currentScreen;
+int highscore = 0;
+
 
 int main() {
     // Enable config flags for resizable window and vertical synchro
@@ -28,9 +30,22 @@ int main() {
     // Set start screen
     currentScreen = Game::MenuScreen::getInstance();
 
+    InitAudioDevice();      // Initialize audio device
+  
+    Sound fxshoot = LoadSound("assets/audio/sfx/laser4.wav");
+  
+        
+
+
+    
+
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
+        if (IsKeyPressed(KEY_SPACE)) PlaySound(fxshoot);
+    
+      
+      
         // Compute required framebuffer scaling
         float scale = MIN((float) GetScreenWidth() / Game::ScreenWidth, (float) GetScreenHeight() / Game::ScreenHeight);
 
@@ -67,6 +82,7 @@ int main() {
     } // Main game loop end
 
     // De-Initialization here...
+    
 
     // Unload render texture
     UnloadRenderTexture(target);
