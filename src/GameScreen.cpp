@@ -288,29 +288,27 @@ void Game::GameScreen::Update() {
 
 
     }
-
     if (highscore == 5) {
         activeEnemies = 1;
         activeEnemies2 = 1;
     }
-    if (highscore == 35) {
+    if (highscore == 15) {
         activeEnemies = 2;
         activeEnemies2 = 1;
 
     }
-    
     if (highscore == 35) {
-        activeEnemies = 2;
-        activeEnemies2 = 1;
-
-    }
-    if (highscore == 45) {
         activeEnemies = 3;
         activeEnemies2 = 1;
 
     }
+    if (highscore == 45) {
+        activeEnemies = 4;
+        activeEnemies2 = 1;
+
+    }
     if (highscore == 60) {
-        activeEnemies = 5;
+        activeEnemies = 6;
         activeEnemies2 = 2;
 
     }
