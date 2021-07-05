@@ -44,3 +44,17 @@ typedef struct Planet
 
 } Planet;
 
+//Asteroid Klasse 
+typedef struct Asteroid
+{
+    Rectangle rect;
+    Vector2 speed;
+    bool active;
+    Color color;
+    Texture2D texture{};
+    bool gothit;
+} Asteroid;
+
+
+
+

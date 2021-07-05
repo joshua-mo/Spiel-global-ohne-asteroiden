@@ -43,7 +43,7 @@ void Game::GameOver::Draw() {
     ClearBackground(RAYWHITE);
    
     DrawTexture(background, 0, 0, WHITE);
-    DrawText("GAME OVER", 25, 200, 90, YELLOW);
-    DrawText(TextFormat("Score: %02i", highscore), 190, 350, 50, WHITE);
-    DrawText("Menu - PRESS ENTER", 100, 570, 35, LIGHTGRAY);
+    DrawText("GAME OVER", 225, 200, 90, YELLOW);
+    DrawText(TextFormat("Score: %02i", highscore), 390, 350, 50, WHITE);
+    DrawText("Menu - PRESS ENTER", 300, 570, 35, LIGHTGRAY);
 }

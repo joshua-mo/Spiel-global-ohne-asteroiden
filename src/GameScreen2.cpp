@@ -20,7 +20,9 @@ Game::GameScreen2::GameScreen2() {
     );
 
     //Texuren Umgebung
-    background = LoadTexture("assets/graphics/background2.png");
+    background2 = LoadTexture("assets/graphics/background2.png");
+    Planet1 = LoadTexture("assets/graphics/planet1.png");
+    Planet2 = LoadTexture("assets/graphics/planet2.png");
     Spaces = LoadTexture("assets/graphics/Spaces.png");
     Lives = LoadTexture("assets/graphics/Lives.png");
 
@@ -34,8 +36,8 @@ Game::GameScreen2::GameScreen2() {
 
     //Planet initialisieren
 
-    planet.position.x = 800 / 2;
-    planet.position.y = 200 + 1175;
+    planet.position.x = 1000 / 2;
+    planet.position.y =  1175;
     planet.radius = 350;
 
 
@@ -68,7 +70,24 @@ Game::GameScreen2::GameScreen2() {
         bullet[i].color = MAROON;
     }
 
+    // Load Asteroid texture
+    asteroidtexture = LoadTexture("assets/graphics/asteroid.png");
 
+    //Anzahl aktive Asteroiden 
+
+    activeAsteroids = 2;
+    //Asteroid 
+
+    for (int i = 0; i < NUM_MAX_ASTEROIDS; i++)
+    {
+        asteroid[i].rect.width = 50;
+        asteroid[i].rect.height = 64;
+        asteroid[i].rect.x = GetRandomValue(0, 600);      //Spawnbereich neuer Asteroid
+        asteroid[i].rect.y = GetRandomValue(-60, -200);
+        asteroid[i].speed.x = 1;
+        asteroid[i].speed.y = 3; //Geschwindigkeit Gegner
+        asteroid[i].active = true;
+    }
 
 
     // Gegner initialisieren
@@ -113,7 +132,7 @@ Game::GameScreen2::GameScreen2() {
 Game::GameScreen2::~GameScreen2() {
     // Your screen cleanup code here...
     UnloadTexture(sprites[0]->texture);
-    UnloadTexture(background);
+    UnloadTexture(background2);
     UnloadTexture(playerTexture);
     UnloadTexture(alienTexture);
     UnloadTexture(alienTexture2);
@@ -147,6 +166,35 @@ void Game::GameScreen2::Update() {
     else if (player.rect.x <= -10) player.rect.x = -10;
     if ((player.rect.x) <= 200) player.rect.x = 200 + 1;           //Spieler an Wänden einschränken
     //else if (player.rect.x <= -10) player.rect.x = -10;
+
+
+
+     // Asteroid Verhalten(Spawnverhalten)
+    for (int i = 0; i < activeAsteroids; i++)
+    {
+        if (asteroid[i].active)
+        {
+            asteroid[i].rect.x += asteroid[i].speed.x;
+            asteroid[i].rect.y += asteroid[i].speed.y;
+
+
+
+            if (CheckCollisionRecs(player.rect, asteroid[i].rect))
+            {
+                player.lives--;
+                asteroid[i].rect.x = GetRandomValue(0, 600);      //Spawnbereich neuer Asteroid
+                asteroid[i].rect.y = GetRandomValue(-60, -200);
+
+            }
+        }
+        if (asteroid[i].rect.x <= -50 || asteroid[i].rect.y >= 1050) //asteroid über Screen hinaus
+        {
+            asteroid[i].rect.x = GetRandomValue(0, 600);      //Spawnbereich neuer Asteroid
+            asteroid[i].rect.y = GetRandomValue(-60, -200);
+        }
+
+    }
+
 
     //Bullets
     if (IsKeyPressed(KEY_SPACE)) {
@@ -354,8 +402,21 @@ void Game::GameScreen2::Draw() {
     //Hitbox Planet
     DrawCircleV(planet.position, planet.radius, RED);
     //Hintergrund
-    DrawTexture(background, 0, 0, WHITE);
+    DrawTexture(background2, 0, 0, WHITE);
 
+
+    //Planet1
+    DrawTexture(Planet1, 150, 715, WHITE);
+
+    //Planet2
+    DrawTexture(Planet2, 100, -600, WHITE);
+
+    //Asteroiden zeichnen
+    for (int i = 0; i < activeAsteroids; i++)
+    {
+        if (asteroid[i].active)
+            DrawTexture(asteroidtexture, asteroid[i].rect.x, asteroid[i].rect.y, WHITE);
+    }
 
     //BUllet zeichnen
     for (int i = 0; i < NUM_SHOOTS; i++)
