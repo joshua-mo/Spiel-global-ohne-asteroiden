@@ -28,7 +28,7 @@ namespace Game {
         //Texturen        
         Texture2D background2;
         Texture2D Planet1;
-        Texture2D Planet2;
+        Texture2D Planet3;
         Texture2D playerTexture;
         Texture2D alienTexture;
         Texture2D alienTexture2;

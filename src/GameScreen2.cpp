@@ -22,7 +22,7 @@ Game::GameScreen2::GameScreen2() {
     //Texuren Umgebung
     background2 = LoadTexture("assets/graphics/background2.png");
     Planet1 = LoadTexture("assets/graphics/planet1.png");
-    Planet2 = LoadTexture("assets/graphics/planet2.png");
+    Planet3 = LoadTexture("assets/graphics/planet12.png");
     Spaces = LoadTexture("assets/graphics/Spaces.png");
     Lives = LoadTexture("assets/graphics/Lives.png");
 
@@ -409,7 +409,7 @@ void Game::GameScreen2::Draw() {
     DrawTexture(Planet1, 150, 715, WHITE);
 
     //Planet2
-    DrawTexture(Planet2, 100, -600, WHITE);
+    DrawTexture(Planet3, 100, -600, WHITE);
 
     //Asteroiden zeichnen
     for (int i = 0; i < activeAsteroids; i++)

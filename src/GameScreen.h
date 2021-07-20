@@ -36,6 +36,7 @@ namespace Game {
         Texture2D Lives;
         Texture2D Spaces;
         Texture2D asteroidtexture;
+        Texture2D BossMonster;
         
        
 
@@ -79,6 +80,11 @@ namespace Game {
 
     static int activeEnemies;
     static int activeEnemies2;
+
+
+    static Enemy Boss[NUM_MAX_ENEMIES];
+
+    static int activeBoss;
 
    
 

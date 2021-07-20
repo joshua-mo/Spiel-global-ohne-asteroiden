@@ -134,6 +134,29 @@ Game::GameScreen::GameScreen() {
         enemy2[i].gothit = false;
     }
 
+    //Boss initalisieren
+// Load Boss ship texture
+    BossMonster = LoadTexture("assets/graphics/BossSide.png");
+    //Anzahl aktive Gegner 
+
+    activeBoss = 1;
+
+    for (int i = 0; i < NUM_MAX_ENEMIES; i++)
+    {
+        Boss[i].rect.width = 128;
+        Boss[i].rect.height = 128;
+        Boss[i].rect.x = 700;
+        Boss[i].rect.y = 400;
+        Boss[i].speed.x = 2;
+        Boss[i].speed.y = 5; //Geschwindigkeit Gegner
+        Boss[i].active = true;
+        Boss[i].gothit = false;
+    }
+
+
+
+
+
   }
 
 
@@ -160,7 +183,19 @@ void Game::GameScreen::ProcessInput() {
     if (IsKeyDown(KEY_UP))
         player.rect.y -= player.speed.y;
 
-   
+   //Boss initalisieren
+    for (int i = 0; i < NUM_MAX_ENEMIES; i++)
+    {
+        Boss[i].rect.width = 128;
+        Boss[i].rect.height = 128;
+        Boss[i].rect.x = 700;
+        Boss[i].rect.y = 400;
+        Boss[i].speed.x = 2;
+        Boss[i].speed.y = 5; //Geschwindigkeit Gegner
+        Boss[i].active = true;
+        Boss[i].gothit = false;
+    }
+
 
 
 }
@@ -172,6 +207,15 @@ void Game::GameScreen::Update() {
     else if (player.rect.y <= -10) player.rect.y = -10;
  if ((player.rect.y) <= 200) player.rect.y = 200 + 1;
 
+ // Boss Verhalten(Spawnverhalten)
+ for (int i = 0; i < activeBoss || i < activeBoss; i++)
+ {
+     if (Boss[i].active)
+     {
+         Boss[i].rect.y -= Boss[i].speed.y;
+     }
+
+ }
 
 
  // Asteroid Verhalten(Spawnverhalten)
@@ -446,6 +490,13 @@ void Game::GameScreen::Draw() {
      {
          if (enemy2[i].active)
              DrawTexture(alienTexture2, enemy2[i].rect.x, enemy2[i].rect.y, WHITE);       
+     }
+
+     //Boss zeichnen
+     for (int i = 0; i < activeEnemies2; i++)
+     {
+         if (Boss[i].active)
+             DrawTexture(BossMonster, Boss[i].rect.x, Boss[i].rect.y, WHITE);
      }
 
 
