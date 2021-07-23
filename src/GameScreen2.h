@@ -26,15 +26,12 @@ namespace Game {
 
     private:
         //Texturen        
-        Texture2D background2;
-        Texture2D Planet1;
-        Texture2D Planet3;
+        Texture2D background;
         Texture2D playerTexture;
         Texture2D alienTexture;
         Texture2D alienTexture2;
         Texture2D Lives;
         Texture2D Spaces;
-        Texture2D asteroidtexture;
 
 
 

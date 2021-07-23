@@ -37,11 +37,11 @@ void Game::helpScreen::Draw() {
 
     DrawTexture(background, 0, 0, WHITE);
 
-    DrawTexture(help, 200, 0, WHITE);
+    DrawTexture(help, 0, 0, WHITE);
 
 
 
     //  DrawText("SpaceGame", 25, 200, 100, YELLOW);
 
-    DrawText("Press [I] to go back", 270, 880, 45, LIGHTGRAY);
+    DrawText("Press [I] to go back", 70, 880, 45, LIGHTGRAY);
 }

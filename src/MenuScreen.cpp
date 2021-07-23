@@ -44,14 +44,14 @@ void Game::MenuScreen::ProcessInput() {
     Vector2 mouse = GetMousePosition();
 
     //Spiel wird gestartet
-    if (IsMouseButtonPressed(0) && (mouse.x > 389) && (mouse.y > 460) && (mouse.x < 610) && (mouse.y < 530)) {
+    if (IsMouseButtonPressed(0) && (mouse.x > 189) && (mouse.y > 460) && (mouse.x < 410) && (mouse.y < 530)) {
         currentScreen = Game::GameScreen::getInstance();
 
     }
 
  
     //Spiel wird beendet
-    if (IsMouseButtonPressed(0) && (mouse.x > 389) && (mouse.y > 595) && (mouse.x < 610) && (mouse.y < 670)) {
+    if (IsMouseButtonPressed(0) && (mouse.x > 189) && (mouse.y > 595) && (mouse.x < 410) && (mouse.y < 670)) {
         exit(0);
     }
 
@@ -68,30 +68,30 @@ void Game::MenuScreen::Draw() {
     ClearBackground(RAYWHITE);
 
     DrawTexture(background, 0, 0, WHITE);
-    DrawTexture(start, 200, 0, WHITE);
-    DrawTexture(quit, 200, 0, WHITE);
+    DrawTexture(start, 0, 0, WHITE);
+    DrawTexture(quit, 0, 0, WHITE);
 
 
-    DrawText("Exterminatus", 222, 200, 85, YELLOW);
+    DrawText("Exterminatus", 22, 200, 85, YELLOW);
   //  DrawText("New Game/Continue", 50, 380, 50, WHITE);
   //  DrawText("Highscore", 180, 480, 50, WHITE);
    // DrawText("Quit Game", 190, 580, 50, WHITE);
 
     Vector2 mouse = GetMousePosition();
 
-    if ((mouse.x > 389) && (mouse.y > 460) && (mouse.x < 610) && (mouse.y < 530)) {
+    if ((mouse.x > 189) && (mouse.y > 460) && (mouse.x < 410) && (mouse.y < 530)) {
       //  DrawText("New Game/Continue", 50, 380, 50, MAGENTA);
-        DrawTexture(startpink, 200, 0, WHITE);
+        DrawTexture(startpink, 0, 0, WHITE);
     }
 
 
-    else if ((mouse.x > 389) && (mouse.y > 595) && (mouse.x < 610) && (mouse.y < 670)) //Bereich  links nach rechts, Bereich oben nach unten
+    else if ((mouse.x > 189) && (mouse.y > 595) && (mouse.x < 410) && (mouse.y < 670)) //Bereich  links nach rechts, Bereich oben nach unten
     {  
        // DrawText("Quit Game", 190, 580, 50, MAGENTA);
-        DrawTexture(quitpink, 200, 0, WHITE);
+        DrawTexture(quitpink, 0, 0, WHITE);
     }
 
-    DrawText("Press [I] for Info", 600, 420, 20, LIGHTGRAY);
+    DrawText("Press [I] for Info", 400, 420, 20, LIGHTGRAY);
 }
 
 

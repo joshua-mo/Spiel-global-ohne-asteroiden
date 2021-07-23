@@ -40,7 +40,7 @@ void Game::StopScreen::Draw() {
 
 
 
-    DrawText("SpaceGame", 225, 200, 100, YELLOW);
-    DrawText("Game paused", 310, 400, 60, LIGHTGRAY);
-    DrawText("Press M to continue", 270, 550, 45, LIGHTGRAY);
+    DrawText("SpaceGame", 25, 200, 100, YELLOW);
+    DrawText("Game paused", 110, 400, 60, LIGHTGRAY);
+    DrawText("Press M to continue", 70, 550, 45, LIGHTGRAY);
 }

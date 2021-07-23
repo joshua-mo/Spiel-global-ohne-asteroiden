@@ -21,8 +21,6 @@ Game::GameScreen::GameScreen() {
 
     //Texuren Umgebung
     background = LoadTexture("assets/graphics/background.png");
-    Planet1 = LoadTexture("assets/graphics/planet1.png");
-    Planet2 = LoadTexture("assets/graphics/planet2.png");
     Spaces = LoadTexture("assets/graphics/Spaces.png");
     Lives = LoadTexture("assets/graphics/Lives.png");
 
@@ -31,27 +29,6 @@ Game::GameScreen::GameScreen() {
     
 
 
-    // Load Asteroid texture
-    asteroidtexture = LoadTexture("assets/graphics/asteroid.png");
-
-    //Anzahl aktive Asteroiden 
-
-    activeAsteroids = 2;
-
-    //Asteroid 
-
-
-
-    for (int i = 0; i < NUM_MAX_ASTEROIDS; i++)
-    {
-        asteroid[i].rect.width = 50;
-        asteroid[i].rect.height = 64;
-        asteroid[i].rect.x = GetRandomValue(1060, 1200);      //Spawnbereich neuer Asteroid
-        asteroid[i].rect.y = GetRandomValue(0, 800);
-        asteroid[i].speed.x = 3;
-        asteroid[i].speed.y = 1; //Geschwindigkeit Gegner
-        asteroid[i].active = true;
-    }
 
 
 
@@ -91,10 +68,6 @@ Game::GameScreen::GameScreen() {
         bullet[i].color = MAROON;
     }
 
-   
-
-
- 
 
 
 
@@ -134,29 +107,6 @@ Game::GameScreen::GameScreen() {
         enemy2[i].gothit = false;
     }
 
-    //Boss initalisieren
-// Load Boss ship texture
-    BossMonster = LoadTexture("assets/graphics/BossSide.png");
-    //Anzahl aktive Gegner 
-
-    activeBoss = 1;
-
-    for (int i = 0; i < NUM_MAX_ENEMIES; i++)
-    {
-        Boss[i].rect.width = 128;
-        Boss[i].rect.height = 128;
-        Boss[i].rect.x = 700;
-        Boss[i].rect.y = 400;
-        Boss[i].speed.x = 2;
-        Boss[i].speed.y = 5; //Geschwindigkeit Gegner
-        Boss[i].active = true;
-        Boss[i].gothit = false;
-    }
-
-
-
-
-
   }
 
 
@@ -183,19 +133,7 @@ void Game::GameScreen::ProcessInput() {
     if (IsKeyDown(KEY_UP))
         player.rect.y -= player.speed.y;
 
-   //Boss initalisieren
-    for (int i = 0; i < NUM_MAX_ENEMIES; i++)
-    {
-        Boss[i].rect.width = 128;
-        Boss[i].rect.height = 128;
-        Boss[i].rect.x = 700;
-        Boss[i].rect.y = 400;
-        Boss[i].speed.x = 2;
-        Boss[i].speed.y = 5; //Geschwindigkeit Gegner
-        Boss[i].active = true;
-        Boss[i].gothit = false;
-    }
-
+   
 
 
 }
@@ -206,44 +144,6 @@ void Game::GameScreen::Update() {
  if ((player.rect.y + 43) >= 800) player.rect.y = 800 - 43;           //Spieler an Wänden einschränken
     else if (player.rect.y <= -10) player.rect.y = -10;
  if ((player.rect.y) <= 200) player.rect.y = 200 + 1;
-
- // Boss Verhalten(Spawnverhalten)
- for (int i = 0; i < activeBoss || i < activeBoss; i++)
- {
-     if (Boss[i].active)
-     {
-         Boss[i].rect.y -= Boss[i].speed.y;
-     }
-
- }
-
-
- // Asteroid Verhalten(Spawnverhalten)
- for (int i = 0; i < activeAsteroids; i++)
- {
-     if (asteroid[i].active)
-     {
-         asteroid[i].rect.x -= asteroid[i].speed.x;
-         asteroid[i].rect.y += asteroid[i].speed.y;
-
-
-
-         if (CheckCollisionRecs(player.rect, asteroid[i].rect))
-         {
-             player.lives--;
-             asteroid[i].rect.x = GetRandomValue(1060, 1200);      //Spawnbereich neuer Asteroid
-             asteroid[i].rect.y = GetRandomValue(0, 800);
-
-         }
-     }
-     if (asteroid[i].rect.x <= -50 || asteroid[i].rect.y >= 1050) //asteroid über Screen hinaus
-     {
-         asteroid[i].rect.x = GetRandomValue(1060, 1200);      //Spawnbereich neuer Asteroid
-         asteroid[i].rect.y = GetRandomValue(0, 800);
-     }
-
- }
-
 
  //Bullets
  if (IsKeyPressed(KEY_SPACE)) {
@@ -451,13 +351,6 @@ void Game::GameScreen::Draw() {
     DrawCircleV(planet.position, planet.radius, RED);          
     //Hintergrund
     DrawTexture(background, 0, 0, WHITE); 
-
-    //Planet1
-    DrawTexture(Planet1, -480, 80, WHITE);
-
-    //Planet2
-    DrawTexture(Planet2, 800, 80, WHITE);
-
    
          
      //BUllet zeichnen
@@ -468,15 +361,7 @@ void Game::GameScreen::Draw() {
      }
 
      //Player zeichnen
-     DrawTexture(playerTexture, player.rect.x, player.rect.y, WHITE);  
-
-     //Asteroiden zeichnen
-     for (int i = 0; i < activeAsteroids; i++)
-     {
-         if (asteroid[i].active)
-             DrawTexture(asteroidtexture, asteroid[i].rect.x, asteroid[i].rect.y, WHITE);
-     }
-
+     DrawTexture(playerTexture, player.rect.x, player.rect.y, WHITE);               
 
      //Gegner zeichnen
      for (int i = 0; i < activeEnemies; i++)
@@ -490,13 +375,6 @@ void Game::GameScreen::Draw() {
      {
          if (enemy2[i].active)
              DrawTexture(alienTexture2, enemy2[i].rect.x, enemy2[i].rect.y, WHITE);       
-     }
-
-     //Boss zeichnen
-     for (int i = 0; i < activeEnemies2; i++)
-     {
-         if (Boss[i].active)
-             DrawTexture(BossMonster, Boss[i].rect.x, Boss[i].rect.y, WHITE);
      }
 
 
