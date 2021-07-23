@@ -5,9 +5,18 @@
 #include "config.h"
 #include "helper.h"
 #include "game.h"
+#include "Entity.h"
 
 Game::Screen* currentScreen;
 int highscore = 0;
+Player player;
+
+#define NUM_MAX_ENEMIES 50
+ Enemy enemy[NUM_MAX_ENEMIES];
+  int activeEnemies;
+
+  Enemy enemy2[NUM_MAX_ENEMIES];
+  int activeEnemies2;
 
 
 int main() {

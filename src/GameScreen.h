@@ -13,7 +13,7 @@
 
 
 #define NUM_SHOOTS 50
-#define NUM_MAX_ENEMIES 50
+
 #define FIRST_WAVE 10
 #define SECOND_WAVE 20
 #define THIRD_WAVE 50
@@ -62,14 +62,14 @@ namespace Game {
     };
 
 
-    static Player player;
+
     static Planet planet;
     static Bullet bullet[NUM_SHOOTS];
-    static Enemy enemy[NUM_MAX_ENEMIES];
-    static Enemy enemy2[NUM_MAX_ENEMIES];
 
-    static int activeEnemies;
-    static int activeEnemies2;
+
+
+
+    
 
    
 

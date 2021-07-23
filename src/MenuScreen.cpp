@@ -20,17 +20,17 @@ Game::MenuScreen::MenuScreen() {
     quitpink = LoadTexture("assets/graphics/button/quitpink.png");
 
 
-    //Einfacher Gegner
-    for (int i = 0; i < NUM_MAX_ENEMIES; i++)
-    {
-        enemy[i].rect.width = 64;
-        enemy[i].rect.height = 50;
-        enemy[i].rect.x = GetRandomValue(0, 600 - 64);
-        enemy[i].rect.y = GetRandomValue(-1000, -20);
-        enemy[i].speed.x = 5;
-        enemy[i].speed.y = 5; //Geschwindigkeit Gegner
-        enemy[i].active = true;
-    }
+    ////Einfacher Gegner
+    //for (int i = 0; i < NUM_MAX_ENEMIES; i++)
+    //{
+    //    enemy[i].rect.width = 64;
+    //    enemy[i].rect.height = 50;
+    //    enemy[i].rect.x = GetRandomValue(0, 600 - 64);
+    //    enemy[i].rect.y = GetRandomValue(-1000, -20);
+    //    enemy[i].speed.x = 5;
+    //    enemy[i].speed.y = 5; //Geschwindigkeit Gegner
+    //    enemy[i].active = true;
+    //}
 }
 
 Game::MenuScreen::~MenuScreen() {

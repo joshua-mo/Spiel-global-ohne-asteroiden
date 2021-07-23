@@ -10,6 +10,19 @@
 
 extern int highscore;
 
+extern Player player;
+
+
+
+extern int activeEnemies;
+
+extern Enemy enemy[NUM_MAX_ENEMIES];
+
+extern int activeEnemies2;
+
+extern Enemy enemy2[NUM_MAX_ENEMIES];
+
+
 Game::GameScreen::GameScreen() {
     // Your screen initialization code here...
     Vector2 vec = {100.0f, 100.0f};
@@ -25,10 +38,8 @@ Game::GameScreen::GameScreen() {
     Lives = LoadTexture("assets/graphics/Lives.png");
 
     
-        
+
     
-
-
 
 
 
@@ -45,12 +56,17 @@ Game::GameScreen::GameScreen() {
     playerTexture = LoadTexture("assets/graphics/player.png");      
 
     // Spieler (Viereck) initialisieren
-    player.rect.x = 250;
-    player.rect.y = 800 / 2.0f;
+    player.pos.x = 250;
+    player.pos.y = 800 / 2.0f;
+    player.pos.z = 750;
+    player.pos.w = 500;
     player.rect.width = 35;
     player.rect.height = 35;
     player.speed.x = 7;
     player.speed.y = 5;
+    player.speed.z = 5;
+    player.speed.w = 7;
+
     player.color = WHITE;
 
 
@@ -58,8 +74,8 @@ Game::GameScreen::GameScreen() {
 
     for (int i = 0; i < NUM_SHOOTS; i++)
     {
-        bullet[i].rect.x = player.rect.x + player.rect.width / 4;               
-        bullet[i].rect.y = player.rect.y + 29;                                //Bullet zentrieren
+        bullet[i].rect.x = player.pos.x + player.rect.width / 4;
+        bullet[i].rect.y = player.pos.y + 29;                                //Bullet zentrieren
         bullet[i].rect.width = 10;
         bullet[i].rect.height = 5;
         bullet[i].speed.x = +10;
@@ -88,10 +104,17 @@ Game::GameScreen::GameScreen() {
     {
         enemy[i].rect.width = 50;
         enemy[i].rect.height = 64;
-        enemy[i].rect.x = GetRandomValue(1100, 1600);      //Spawnbereich neuer Gegner x
-        enemy[i].rect.y = GetRandomValue(200, 700);
+
+        enemy[i].pos.x = GetRandomValue(1100, 1600);      //Spawnbereich neuer Gegner x
+        enemy[i].pos.y = GetRandomValue(200, 700);
+        enemy[i].pos.z = GetRandomValue(200, 700);
+        enemy[i].pos.w = GetRandomValue(200, 700);
         enemy[i].speed.x = 5; 
         enemy[i].speed.y = 5; //Geschwindigkeit Gegner
+        enemy[i].speed.z = 5;
+        enemy[i].speed.w = 5; 
+       
+
         enemy[i].active = true;
     }
     //Schwerer Gegner
@@ -99,10 +122,14 @@ Game::GameScreen::GameScreen() {
     {
         enemy2[i].rect.width = 120;
         enemy2[i].rect.height = 128;
-        enemy2[i].rect.x = GetRandomValue(1100, 1600);
-        enemy2[i].rect.y = GetRandomValue(200, 700);
-        enemy2[i].speed.x = 2;
+        enemy2[i].pos.x = GetRandomValue(1100, 1600);      //Spawnbereich neuer Gegner x
+        enemy2[i].pos.y = GetRandomValue(200, 700);
+        enemy2[i].pos.z = GetRandomValue(200, 700);
+        enemy2[i].pos.w = GetRandomValue(200, 700);
+        enemy2[i].speed.x = 5;
         enemy2[i].speed.y = 5; //Geschwindigkeit Gegner
+        enemy2[i].speed.z = 5;
+        enemy2[i].speed.w = 5;
         enemy2[i].active = true;
         enemy2[i].gothit = false;
     }
@@ -129,9 +156,9 @@ void Game::GameScreen::ProcessInput() {
     if (IsKeyPressed(KEY_TAB)) currentScreen = Game::GameScreen2::getInstance();
     // Spieler bewegen (links-rechts)
     if (IsKeyDown(KEY_DOWN))
-        player.rect.y += player.speed.y;
+        player.pos.y += player.speed.y;
     if (IsKeyDown(KEY_UP))
-        player.rect.y -= player.speed.y;
+        player.pos.y -= player.speed.y;
 
    
 
@@ -140,6 +167,22 @@ void Game::GameScreen::ProcessInput() {
 
 void Game::GameScreen::Update() {
     // Your update game code here...
+    for (int i = 0; i < NUM_MAX_ENEMIES; i++)
+    {
+        enemy[i].rect.x = enemy[i].pos.x;
+        enemy[i].rect.y = enemy[i].pos.y;
+    }
+
+    for (int i = 0; i < NUM_MAX_ENEMIES; i++)
+    {
+        enemy2[i].rect.x = enemy2[i].pos.x;
+        enemy2[i].rect.y = enemy2[i].pos.y;
+    }
+ 
+
+    
+    player.pos.x = 250;
+
 
  if ((player.rect.y + 43) >= 800) player.rect.y = 800 - 43;           //Spieler an Wänden einschränken
     else if (player.rect.y <= -10) player.rect.y = -10;
@@ -187,8 +230,8 @@ void Game::GameScreen::Update() {
                  if (CheckCollisionRecs(bullet[i].rect, enemy[j].rect))
                  {
                      bullet[i].active = false;
-                     enemy[j].rect.x = GetRandomValue(1100, 1600);      //Spawnbereich neuer Gegner x
-                     enemy[j].rect.y = GetRandomValue(200, 736);     //Spawnbereich neuer Gegner y
+                     enemy[j].pos.x = GetRandomValue(1100, 1600);      //Spawnbereich neuer Gegner x
+                     enemy[j].pos.y = GetRandomValue(200, 736);     //Spawnbereich neuer Gegner y
                      highscore++;
                   
                
@@ -202,8 +245,8 @@ void Game::GameScreen::Update() {
                      if (CheckCollisionRecs(bullet[i].rect, enemy2[j].rect))
                      {
                          bullet[i].active = false;
-                         enemy2[j].rect.x = GetRandomValue(1100, 1600);      //Spawnbereich neuer Gegner x
-                         enemy2[j].rect.y = GetRandomValue(200, 672);     //Spawnbereich neuer Gegner y
+                         enemy2[j].pos.x = GetRandomValue(1100, 1600);      //Spawnbereich neuer Gegner x
+                         enemy2[j].pos.y = GetRandomValue(200, 672);     //Spawnbereich neuer Gegner y
                          highscore++;
                          enemy2[j].gothit = false;
                      }
@@ -235,14 +278,14 @@ void Game::GameScreen::Update() {
                  if (CheckCollisionRecs(player.rect, enemy[j].rect))
                  {
                      player.lives--;
-                     enemy[j].rect.x = GetRandomValue(1020, 2000);      //Spawnbereich neuer Gegner x
-                     enemy[j].rect.y = GetRandomValue(200, 736);     //Spawnbereich neuer Gegner y
+                     enemy[j].pos.x = GetRandomValue(1020, 2000);      //Spawnbereich neuer Gegner x
+                     enemy[j].pos.y = GetRandomValue(200, 736);     //Spawnbereich neuer Gegner y
                  }
                  if (CheckCollisionRecs(player.rect, enemy2[j].rect))
                  {
                      player.lives--;
-                     enemy2[j].rect.x = GetRandomValue(1020, 2000);      //Spawnbereich neuer Gegner x
-                     enemy2[j].rect.y = GetRandomValue(200, 772);     //Spawnbereich neuer Gegner y
+                     enemy2[j].pos.x = GetRandomValue(1020, 2000);      //Spawnbereich neuer Gegner x
+                     enemy2[j].pos.y = GetRandomValue(200, 772);     //Spawnbereich neuer Gegner y
                  }
              }
          }
@@ -262,12 +305,12 @@ void Game::GameScreen::Update() {
     {
         if (enemy[i].active)
         {
-            enemy[i].rect.x -= enemy[i].speed.x;
+            enemy[i].pos.x -= enemy[i].speed.x;
 
             if (CheckCollisionCircleRec(planet.position, 350, enemy[i].rect))    //         //Kollision Planet mit Enemy
             {
-                enemy[i].rect.x = GetRandomValue(1020, 2000);
-                enemy[i].rect.y = GetRandomValue(200, 736);
+                enemy[i].pos.x = GetRandomValue(1020, 2000);
+                enemy[i].pos.y = GetRandomValue(200, 736);
                 planet.landed--;
 
             }
@@ -275,12 +318,12 @@ void Game::GameScreen::Update() {
 
         if (enemy2[i].active)
         {
-            enemy2[i].rect.x -= enemy2[i].speed.x;
+            enemy2[i].pos.x -= enemy2[i].speed.x;
 
             if (CheckCollisionCircleRec(planet.position, 350, enemy2[i].rect))    //         //Kollision Planet mit Enemy2
             {
-                enemy2[i].rect.x = GetRandomValue(1020, 2000);
-                enemy2[i].rect.y = GetRandomValue(200, 672);
+                enemy2[i].pos.x = GetRandomValue(1020, 2000);
+                enemy2[i].pos.y = GetRandomValue(200, 672);
                 planet.landed--;
 
             }
@@ -361,7 +404,7 @@ void Game::GameScreen::Draw() {
      }
 
      //Player zeichnen
-     DrawTexture(playerTexture, player.rect.x, player.rect.y, WHITE);               
+     DrawTexture(playerTexture, player.pos.x, player.pos.y, WHITE);
 
      //Gegner zeichnen
      for (int i = 0; i < activeEnemies; i++)
@@ -429,11 +472,6 @@ void Game::GameScreen::Draw() {
      }
 
      
-
-
-
-
-
 
 
 
